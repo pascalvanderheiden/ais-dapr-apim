@@ -1,0 +1,39 @@
+### GET Health
+GET https://localhost:8081/dapr/health
+
+###
+curl https://localhost:8081/dapr/health -k
+
+### POST Order
+POST https://localhost:8081/dapr/order
+Content-Type: application/json
+
+{
+    "name": "Microsoft Order",
+    "reference": "MICROSOFT-INC-X1",
+    "date": "2020-06-15T13:45:30",
+    "amount": 326842
+}
+
+###
+curl -X -L POST https://localhost:8081/dapr/order -H 'Content-Type: application/json' -d @sample-post.json
+
+### GET Orders
+GET https://localhost:8081/dapr/order
+
+###
+curl https://localhost:8081/dapr/order -k
+
+### GET Order 1
+GET https://localhost:8081/dapr/order/1
+
+###
+curl https://localhost:8081/dapr/order/1 -k
+
+### GET Order 2
+GET https://localhost:8081/dapr/order/2
+
+###
+curl https://localhost:8081/dapr/order/2 -k
+
+

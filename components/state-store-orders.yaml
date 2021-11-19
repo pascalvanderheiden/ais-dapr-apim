@@ -1,0 +1,14 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: state-store-orders
+spec:
+  type: state.azure.tablestorage
+  version: v1
+  metadata:
+  - name: accountName
+    value: aissharedst01
+  - name: accountKey
+    value: ZB+USoaPXSi777xotoI8TbxOMuXXRxiKzJMbQ04OIZ8alukdER/Bwyr48pi9Ucg+ndHN17VEp70lXCXWab3FCQ== 
+  - name: tableName
+    value: orders

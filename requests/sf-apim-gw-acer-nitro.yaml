@@ -1,0 +1,76 @@
+# NOTE: Before deploying to a production environment, please review the documentation -> https://aka.ms/self-hosted-gateway-production
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sf-apim-gw-acer-nitro-env
+data:
+  config.service.endpoint: "https://aisshared.management.azure-api.net/subscriptions/0eb49d19-cb9e-43b2-90e0-ec9298d36203/resourceGroups/aisshared-rg/providers/Microsoft.ApiManagement/service/aisshared?api-version=2021-01-01-preview"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sf-apim-gw-acer-nitro
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sf-apim-gw-acer-nitro
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 25%
+  template:
+    metadata:
+      annotations:
+        dapr.io/enabled: "true" 
+        dapr.io/app-id: "sf-apim-gw-acer-nitro-app"
+        dapr.io/app-port: "3500"
+      labels:
+        app: sf-apim-gw-acer-nitro
+    spec:
+      terminationGracePeriodSeconds: 60
+      containers:
+      - name: sf-apim-gw-acer-nitro
+        image: mcr.microsoft.com/azure-api-management/gateway:latest
+        ports:
+        - name: http
+          containerPort: 8080
+        - name: https
+          containerPort: 8081
+        readinessProbe:
+          httpGet:
+            path: /internal-status-0123456789abcdef
+            port: http
+            scheme: HTTP
+          initialDelaySeconds: 0
+          periodSeconds: 5
+          failureThreshold: 3
+          successThreshold: 1
+        env:
+        - name: config.service.auth
+          valueFrom:
+            secretKeyRef:
+              name: sf-apim-gw-acer-nitro-token
+              key: value
+        envFrom:
+        - configMapRef:
+            name: sf-apim-gw-acer-nitro-env
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sf-apim-gw-acer-nitro
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+  - name: https
+    port: 443
+    targetPort: 8081
+  selector:
+    app: sf-apim-gw-acer-nitro
