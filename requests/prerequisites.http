@@ -3,9 +3,6 @@ POST http://localhost:3500/v1.0/invoke/httpbin-app/method/post
 
 This is my test body
 
-###
-curl -k -X POST http://localhost:3500/v1.0/invoke/httpbin-app/method/post -H 'Content-Type: application/json' -d 'This is my test body'
-
 ### Update the customer state store with required values
 POST http://localhost:3500/v1.0/state/state-store-orders
 Content-Type: application/json
@@ -33,18 +30,8 @@ Content-Type: application/json
     }
 ]
 
-###
-curl –k –X POST http://localhost:3500/v1.0/state/state-store-orders -H 'Content-Type: application/json’ -d @sample-data.json
-
 ### Validate if the customer state store is updated correctly
 GET http://localhost:3500/v1.0/state/state-store-orders/1
 
-###
-curl http://localhost:3500/v1.0/state/state-store-orders/1 -k
-
-
 ### Validate if the customer state store is updated correctly
 GET http://localhost:3500/v1.0/state/state-store-orders/2
-
-###
-curl http://localhost:3500/v1.0/state/state-store-orders/2 -k

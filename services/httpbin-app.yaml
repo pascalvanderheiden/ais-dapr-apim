@@ -19,6 +19,7 @@ spec:
         dapr.io/enabled: "true"
         dapr.io/app-id: "httpbin-app"
         dapr.io/app-port: "80"
+        dapr.io/config: "tracing"
     spec:
       containers:
       - image: docker.io/kennethreitz/httpbin

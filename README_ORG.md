@@ -223,6 +223,7 @@ kubectl apply -f services/httpbin-app.yaml
 
 ```
 kubectl port-forward deployment/local-apim-gateway 3500:3500
+kubectl port-forward deployment/rabbitmq-cluster-operator 15672:15672 -n rabbitmq-system
 ``` 
 
 * Open the `requests/prerequisites.http` file in Visual Studio Code and execute the **Test Service Invocation** request.  This just echos back the request. 
