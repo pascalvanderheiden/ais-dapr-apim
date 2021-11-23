@@ -9,4 +9,4 @@ spec:
   - name: connectionString
     value: Endpoint=sb://aisshared-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=El7CUbmf3uVvLFmmqNXzVjW9QG8NPw6V7GEkuRZZv90=
   - name: consumerID
-    value: sf-apim-gw-acer-nitro
+    value: apim-local-gw
