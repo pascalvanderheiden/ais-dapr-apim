@@ -5,6 +5,11 @@ This repo contains the technical instructions to complete an end-to-end scenario
 minikube start
 dapr init -k
 
+## Add Distributed Tracing with Application Insights
+
+kubectl apply -f config/open-telemetry-collector-appinsights.yaml
+kubectl apply -f config/collector-config.yaml
+
 ## Create API Gateway
 ## Download file and script
 ## Add Dapr Sidecar
@@ -17,20 +22,16 @@ spec:
             dapr.io/enabled: "true" 
             dapr.io/app-id: "apim-local-gw-app"
             dapr.io/app-port: "3500"
-#            dapr.io/config: "tracing"
+            dapr.io/config: "tracing"
 
 ## Run script from portal
 
 kubectl create secret generic xxx --from-literal=value="xxx" --type=Opaque
+
 kubectl apply -f requests/apim-local-gw.yaml
 
 kubectl get pods
-kubectl describe pod apim-local-gw-845974485-62hpd
-
-## Add Distributed Tracing with Application Insights
-
-kubectl apply -f config/open-telemetry-collector-appinsights.yaml
-kubectl apply -f config/collector-config.yaml
+kubectl describe pod <PODNAME>
 
 ## Get Health (/health) policy (check APIM connection)
 
@@ -79,6 +80,8 @@ kubectl port-forward service/apim-local-gw 8080:80 8081:443
 
 kubectl apply -f services/httpbin-app.yaml
 
+kubectl get pods
+
 kubectl port-forward service/apim-local-gw 8080:80 8081:443
 
 # Test
@@ -92,6 +95,8 @@ kubectl port-forward service/apim-local-gw 8080:80 8081:443
 
 kubectl apply -f components/state-store-orders.yaml
 
+kubectl get components
+
 kubectl port-forward deployment/apim-local-gw 3500:3500
 
 # Get some orders in 
@@ -100,3 +105,5 @@ kubectl port-forward deployment/apim-local-gw 3500:3500
 kubectl port-forward service/apim-local-gw 8080:80 8081:443
 
 # Test
+
+# Application Insights Portal

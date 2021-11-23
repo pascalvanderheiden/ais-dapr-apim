@@ -149,6 +149,8 @@ kubectl get pods
 kubectl describe pod <POD_NAME>
 ```
 ## Add Distributed Tracing with Application Insights
+I'm using the [OpenTelemetry Collector](https://github.com/open-telemetry/opentelemetry-collector), as it is a vendor agnostics implementation on how to receive, process and export telemetry data.
+ 
 * Edit the YAML file, and change the Application Insights Instrumentation Key.
 ```
 code . config/open-telemetry-collector-appinsights.yaml
