@@ -37,7 +37,7 @@ choco install azure-cli
 
 ## Clone this repo
 ```
-git clone <repo url>
+git clone https://github.com/pascalvanderheiden/ais-dapr-apim
 ```
 
 ## Setup local environment
@@ -317,12 +317,11 @@ code . requests/tests.http
 ```
 
 ## Check out Application Insights for the Distributed Trace Logging
-In the Azure Portal, go to your Application Insights and open the Application Map. Here you can see a visualisation of what call's you made on a container/component level. You can drilldown into the actual call's, and see what is happing on a detail level. 
-
+In the Azure Portal, go to your Application Insights and open the Application Map. Here you can see a visualisation of what call's you made on a container/component level. You can drilldown into the actual call's, and see what is happing on a detail level.
 ![ais-dapr-apim](docs/images/app-insights.png)
 
 ## Using Key Vault for the Azure Storage and Service Bus Queue
-When you are going to deploy this in production, please use Key Vault integration for storing your secrets.
+> When you are going to deploy this in production, please use Key Vault integration for storing your secrets.
 
 ## Want to use Zipkin instead of Application Insights
 If you want to run you Distributed Tracing locally as well, you can deploy Zipkin and see your tracing from here.
