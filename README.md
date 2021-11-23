@@ -317,7 +317,8 @@ code . requests/tests.http
 ```
 
 ## Check out Application Insights for the Distributed Trace Logging
-In the Azure Portal, go to your Application Insights and open the Application Map. Here you can see a visualisation of what call's you made on a container/component level. You can drilldown into the actual call's, and see what is happing on a detail level.
+In the Azure Portal, go to your Application Insights and open the Application Map. Here you can see a visualisation of what call's you made on a container/component level. You can drilldown into the actual call's, and see what is happening on a detail level.
+
 ![ais-dapr-apim](docs/images/app-insights.png)
 
 ## Using Key Vault for the Azure Storage and Service Bus Queue
