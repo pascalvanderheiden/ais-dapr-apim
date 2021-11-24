@@ -120,6 +120,7 @@ $APPINSIGHTS_NAME=<YOUR_APPINSIGHTS_NAME>
 ```
 az monitor app-insights component create --app $APPINSIGHTS_NAME --location westeurope -g $RESOURCE_GROUP_NAME
 ```
+```
 $APPINSIGHTS_KEY=$(az resource show --name $APPINSIGHTS_NAME -g $RESOURCE_GROUP_NAME --resource-type 'microsoft.insights/components' -o tsv --query properties.InstrumentationKey)
 ```
 ```
