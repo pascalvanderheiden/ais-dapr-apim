@@ -7,8 +7,8 @@ spec:
   version: v1
   metadata:
   - name: accountName
-    value: aissharedst01
+    value: <YOUR_STORAGE_ACCOUNT_NAME>
   - name: accountKey
-    value: ZB+USoaPXSi777xotoI8TbxOMuXXRxiKzJMbQ04OIZ8alukdER/Bwyr48pi9Ucg+ndHN17VEp70lXCXWab3FCQ== 
+    value: <YOUR_STORAGE_ACCOUNT_KEY>
   - name: tableName
     value: orders

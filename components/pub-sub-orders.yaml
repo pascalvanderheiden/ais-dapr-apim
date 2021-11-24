@@ -7,6 +7,6 @@ spec:
   version: v1
   metadata:
   - name: connectionString
-    value: Endpoint=sb://aisshared-ns.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=El7CUbmf3uVvLFmmqNXzVjW9QG8NPw6V7GEkuRZZv90=
+    value: <YOUR_SERVICE_BUS_CONNECTION_STRING>
   - name: consumerID
     value: apim-local-gw

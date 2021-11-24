@@ -1,7 +1,7 @@
 # ais-dapr-apim
 This repo contains the technical instructions to complete an end-to-end scenario for using Dapr with Azure API Management Self-Hosted Gateway and Distributed Tracing via Application Insights.
 
-I came across this [blog](https://yourazurecoach.com/2020/09/22/azure-api-management-integration-with-dapr/) and I really liked the samples in this blog. I extended this solution with tracing in Application Insights. Kudo's for Toon who wrote this blogpost!
+I came across this [blog](https://yourazurecoach.com/2020/09/22/azure-api-management-integration-with-dapr/) and I really liked the samples in this blog. I extended this solution with distributed tracing in Application Insights. Kudo's for Toon who wrote this blogpost!
 
 ## Architecture
 ![ais-dapr-apim](docs/images/arch.png)
@@ -156,9 +156,12 @@ I'm using the [OpenTelemetry Collector](https://github.com/open-telemetry/opente
 code . config/open-telemetry-collector-appinsights.yaml
 ```
 ```yaml
-azuremonitor:
-    endpoint: "https://dc.services.visualstudio.com/v2/track"
-    instrumentation_key: "<YOUR_APPINSIGHTS_KEY>"
+data:
+  otel-collector-config:
+    exporters:
+      azuremonitor:
+          endpoint: "https://dc.services.visualstudio.com/v2/track"
+          instrumentation_key: "<YOUR_APPINSIGHTS_KEY>"
 ```
 * Apply the changes
 ```
@@ -234,7 +237,7 @@ kubectl apply -f components/pub-sub-orders.yaml
 ```
 kubectl get components
 ```
-* EDIT: For some reason the component gave an error, but after I restarted the deployments everything was running fine
+> EDIT: For some reason the component gave an error, but after I restarted the deployments everything was running fine
 ```
 kubectl rollout restart deployments/apim-local-gw
 ```
