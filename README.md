@@ -66,19 +66,23 @@ az group create --name $RESOURCE_GROUP_NAME --location westeurope
 > If you have already an existing API Management instance (*Developer or Premium tier*), you can also use that one, as the provisioning of an API Management instance takes between 15 and 30 minutes
 ```
 $APIM_NAME=<YOUR_UNIQUE_APIM_NAME>
+```
+```
 az apim create --name $APIM_NAME --resource-group $RESOURCE_GROUP_NAME --location westeurope --publisher-email user@example.com --publisher-name Example
 ```
 * Choose a unique Azure storage account name
 ```
 $STORAGE_ACCOUNT_NAME=<YOUR_UNIQUE_STORAGE_ACCOUNT_NAME>
 ```
-* Create an Azure storage account.  This will be used as a Dapr statestore
+* Create an Azure Storage Account. This will be used as a Dapr statestore
 ```
 az storage account create --name $STORAGE_ACCOUNT_NAME --resource-group $RESOURCE_GROUP_NAME
 ```
 * Set storage account key variable
 ```
-$STORAGE_ACCOUNT_KEY=$(az storage account keys list --account-name $STORAGE_ACCOUNT_NAME% --query [0].value --output tsv')
+$STORAGE_ACCOUNT_KEY=$(az storage account keys list --account-name $STORAGE_ACCOUNT_NAME --query [0].value --output tsv)
+```
+```
 echo $STORAGE_ACCOUNT_KEY
 ```
 * Create Table Queue in Storage Account
@@ -91,7 +95,7 @@ $SERVICE_BUS_NAMESPACE_NAME=<YOUR_UNIQUE_SERVICE_BUS_NAMESPACE_NAME>
 ```
 * Create an Azure Service Bus namespace.  This will be used for testing Dapr publish/subscribe.
 ```
-az servicebus namespace create --name $SERVICE_BUS_NAMESPACE_NAME --resource-group $RESOURCE_GROUP_NAME%
+az servicebus namespace create --name $SERVICE_BUS_NAMESPACE_NAME --resource-group $RESOURCE_GROUP_NAME
 ```
 * Create an Azure Service Bus topic, named *orders*.
 ```
@@ -104,14 +108,21 @@ az servicebus topic subscription create --resource-group $RESOURCE_GROUP_NAME --
 * Set the service bus connection string
 > :warning: for production usage, I highly recommend to create an application specific authorization rule
 ```
-SERVICE_BUS_CONNECTION_STRING=$(az servicebus namespace authorization-rule keys list --name RootManageSharedAccessKey --namespace-name $SERVICE_BUS_NAMESPACE_NAME --resource-group $RESOURCE_GROUP_NAME --query primaryConnectionString --output tsv')
+$SERVICE_BUS_CONNECTION_STRING=$(az servicebus namespace authorization-rule keys list --name RootManageSharedAccessKey --namespace-name $SERVICE_BUS_NAMESPACE_NAME --resource-group $RESOURCE_GROUP_NAME --query primaryConnectionString --output tsv)
+```
+```
 ECHO $SERVICE_BUS_CONNECTION_STRING
 ```
 * Create Application Insights resource
 ```
 $APPINSIGHTS_NAME=<YOUR_APPINSIGHTS_NAME>
+```
+```
 az monitor app-insights component create --app $APPINSIGHTS_NAME --location westeurope -g $RESOURCE_GROUP_NAME
-SET APPINSIGHTS_KEY=$(az resource show --name $APPINSIGHTS_NAME -g $RESOURCE_GROUP_NAME --resource-type 'microsoft.insights/components' -o tsv --query properties.InstrumentationKey)
+```
+$APPINSIGHTS_KEY=$(az resource show --name $APPINSIGHTS_NAME -g $RESOURCE_GROUP_NAME --resource-type 'microsoft.insights/components' -o tsv --query properties.InstrumentationKey)
+```
+```
 ECHO $APPINSIGHTS_KEY
 ```
 * You can use use API Management natively with Application Insights, just follow this link:
