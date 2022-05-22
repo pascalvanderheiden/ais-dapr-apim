@@ -259,7 +259,7 @@ kubectl port-forward service/apim-local-gw 8080:80 8081:443
 ```
 * Use the Test Script in this file
 ```
-code . requests/tests.http
+requests/tests.http
 ```
 * Check the message in Service Bus in the Azure Portal
 
@@ -298,7 +298,7 @@ code . requests/tests.http
 ```
 * Update the YAML File with Storage Account Name and Key
 ```
-code . components/pub-sub-orders.yaml
+code . components/state-store-orders.yaml
 ```
 ```yaml
 spec:
